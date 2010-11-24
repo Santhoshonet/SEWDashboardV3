@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" >
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<title>Project Dashboard</title>
+<link REL="shortcut icon" type="image/x-icon" HREF="favicon.ico"> 
+<!-- Stylesheets -->
+<%= stylesheet_link_tag "reset", :media => "screen,projection" %>
+<%= stylesheet_link_tag "site", :media => "screen, projection" %>
+<%= stylesheet_link_tag "jquery.jqplot" %>
+<!-- Javascript -->
+<!--[if IE]><%= javascript_include_tag "excanvas.min" %><![endif]-->
+<%= javascript_include_tag "jquery-1.4.3.min" %>
+<%= javascript_include_tag "modernizr-1.6.min" %>
+<%= javascript_include_tag "jquery.jqplot" %>
+<%= javascript_include_tag "plugins/jqplot.cursor" %>
+<%= javascript_include_tag "plugins/jqplot.dateAxisRenderer.min" %>
+<%= javascript_include_tag "plugins/jqplot.canvasAxisLabelRenderer.min" %>
+<%= javascript_include_tag "plugins/jqplot.canvasAxisTickRenderer.min" %>
+<%= javascript_include_tag "plugins/jqplot.canvasTextRenderer.min" %>
+<%= javascript_include_tag "plugins/jqplot.barRenderer.min" %>
+<%= javascript_include_tag "plugins/jqplot.pointLabels.min" %>
+<%= javascript_include_tag "plugins/jqplot.categoryAxisRenderer.min" %>
+<%= javascript_include_tag "plugins/jqplot.highlighter.min" %>
+<%= javascript_include_tag "plugins/jqplot.enhancedLegendRenderer.min" %>
+<%= javascript_include_tag "plugins/jqplot.donutRenderer.min" %>
+<%= javascript_include_tag "plugins/jqplot.pointLabels.min" %>
+<% if controller.action_name == "resource" %>
+    <%= javascript_include_tag "bullet" %>
+    <%= javascript_include_tag "resourcereport" %>
+<% else %>
+    <%= javascript_include_tag "schedulereport" %>
+    <%= javascript_include_tag "dashboard" %>
+<% end %>
+</head>
+<body>
+	<!--Header-->
+	<div class="header-container">
+        <%= image_tag "logo-small.png" %>
+	</div>
+	<div class="nav-container">
+		<div class="top-nav">
+			<ul class="nav">
+				<li class="selected"><a href="#">Dashboard</a></li>
+				<li><%= link_to "Projects" , projects_path %></li>
+			</ul>
+		</div>
+	</div>
+    <%= yield %>
+</body>
+</html>

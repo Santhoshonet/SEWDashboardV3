@@ -1,0 +1,158 @@
+<!--Body-->
+	<div class="header-container">
+		<div class="project-select">
+                <% unless session[:project_id].nil? or session[:project_id].empty? %>
+                    <% Project.find(:all, :conditions => "id = #{session[:project_id]}").each do |proj| %>
+                        <p class="project-name"><%= proj.name%></p>
+				        <span class="project-location"><%= proj.location %><%= image_tag "project-dropdown-arrow.png" %></span>
+                    <% end %>
+                <% else %>
+                    <p class="project-name">Select your project</p>
+				    <span class="project-location"><img src="images/project-dropdown-arrow.png"/></span>
+                <% end %>
+		</div>
+       <div id="project-select-dropdown-container">
+            <ul id="project-select-dropdown">
+                <% @projectlist.each do |proj| %>
+                    <a href="<%= projectdetails_path + "/#{proj.id}" %>" nav=<%= projectdetails_path + "/#{proj.id}" %>><li><%= proj.name %></li> </a>
+                <% end %>
+			</ul>
+       </div>
+	</div>
+	<div class="container">
+        <div class="sub-nav">
+            <ul>
+                <li class="selected"><%= link_to "Schedule",projectdetails_path %></li>
+                <li><%= link_to "Machinery",materials_path %></li>
+                <li><%= link_to "Material",material_actuals_path %></li>
+            </ul>
+        </div>
+		<table class="data">
+			<tr>
+				<th class="left" tooltip="Project Month">Month</th>
+				<th class="middle" tooltip="Original Baseline (in crores)">
+					Planned
+					<p class="title-subtext">In Crores</p>
+				</th>
+                <th tooltip="Latest Revised Estimate Site (in crores)">
+					LRE Site
+					<p class="title-subtext">In Crores</p>
+				</th>
+				<th tooltip="Latest Revised Estimate PMC (in crores)">
+					LRE PMC
+					<p class="title-subtext">In Crores</p>
+				</th>
+				<th tooltip="Actual Billed (in crores)">
+					AC
+					<p class="title-subtext">In Crores</p>
+				</th>
+                <th tooltip="Number of Internal Issues">Int Issues</th>
+                <th tooltip="Number of External Issues">Ext Issues</th>
+				<th tooltip="Percentage Progress">Progress
+                    <p class="title-subtext">In %</p>
+                </th>
+				<th class="right" tooltip="">Action</th>
+			</tr>
+            <% @projectdetails.each_with_index do |projectdetail,index| %>
+            <tr <% if index%2 == 1 %> class="odd" <% end %>>
+                <td><%=h projectdetail.month.strftime("%b - %Y") %></td>
+                <td><%=h projectdetail.OriginalBaselinePlan %></td>              
+                <td><%=h projectdetail.LreSite %></td>
+                <td><%=h projectdetail.LrePmc %></td>
+                <td><%=h projectdetail.Ac %></td>
+                <td><%=h projectdetail.InternalIssues %></td>
+                <td><%=h projectdetail.ExternalIssues %></td>
+                <td><%=h projectdetail.PercentageProgress %></td>
+                <td><%= link_to 'Edit', edit_projectdetail_path(projectdetail) %></td>
+            </tr>
+            <% end %>
+		</table>
+        <% unless @projectdetail.nil? %>
+        <table id="TblAddnewProjectDetail">
+            <tr>
+                <td>
+                  <%= link_to 'Add new Project Detail', projectdetails_path, :id => "LnkAddnewprojectDetail" %>
+                </td>
+            </tr>
+        </table>
+            <% form_for(@projectdetail) do |f| %>
+	    	<table class="data" id="TblAddProjectDetailForm">
+		    	<tr>
+			    	<td colspan="7">
+				    	<div class="data-entry-form">
+					    	<div class="month-year">
+						    	<ol>
+							    	<li>
+								    	<label>Month</label>
+                                        <select id="projectdetail_month_1i" name="projectdetail[month(2i)]">
+                                          <option value="1" <% if Time.new.month == 1 %> selected="True" <% end %>>January</option>
+                                          <option value="2" <% if Time.new.month == 2 %> selected="True" <% end %>>February</option>
+                                          <option value="3" <% if Time.new.month == 3 %> selected="True" <% end %>>March</option>
+                                          <option value="4" <% if Time.new.month == 4 %> selected="True" <% end %>>April</option>
+                                          <option value="5" <% if Time.new.month == 5 %> selected="True" <% end %>>May</option>
+                                          <option value="6" <% if Time.new.month == 6 %> selected="True" <% end %>>June</option>
+                                          <option value="7" <% if Time.new.month == 7 %> selected="True" <% end %>>July</option>
+                                          <option value="8" <% if Time.new.month == 8 %> selected="True" <% end %>>August</option>
+                                          <option value="9" <% if Time.new.month == 9 %> selected="True" <% end %>>September</option>
+                                          <option value="10" <% if Time.new.month == 10 %> selected="True" <% end %>>October</option>
+                                          <option value="11" <% if Time.new.month == 11 %> selected="True" <% end %>>November</option>
+                                          <option value="12" <% if Time.new.month == 12 %> selected="True" <% end %>>December</option>
+                                        </select>
+			    					</li>
+                                    <li class="year-input">
+                                        <label>Year</label>
+                                        <select id="projectdetail_month_2i" name="projectdetail[month(1i)]">
+                                               <% @currentyear.upto(@currentyear + 10) do |m| %>
+                                                    <option value="<%=  m %>" <% if m == Time.new.year %> selected="True" <% end %> ><%=  m %></option>
+                                                <% end %>
+                                        </select>
+                                        <select id="projectdetail_month_3i" name="projectdetail[month(3i)]" style="display:none;">
+                                            <option value="1" selected="true">1</option>
+                                        </select>
+                                    </li>
+					    		</ol>
+						    </div>
+                            <div class="clearfix">
+                                <%= f.error_messages %>
+		    				</div>
+			    			<ol>
+				    			<li>
+					    			<label for="field_2">Original Baseline Plan</label>
+						    		<%= f.text_field :OriginalBaselinePlan, :id => "field_2", :class => "normal-textfield" %>
+							    </li>
+    							<li>
+	    							<label for="field_4">LRE Site</label>
+                                    <%= f.text_field :LreSite, :id => "field4", :class => "normal-textfield" %>
+			    				</li>
+                                <li>
+					    			<label for="field_5">LRE PMC</label>
+						    		<%= f.text_field :LrePmc, :id => "field5", :class => "normal-textfield" %>
+                                </li>
+    							<li>
+	    							<label for="field_6">Actual Cost</label>
+                                    <%= f.text_field :Ac, :id => "field6", :class => "normal-textfield" %>
+                                </li>
+				    			<li>
+					    			<label for="field_7">Percentage Progress</label>
+                                    <%= f.text_field :PercentageProgress, :id => "field7", :class => "normal-textfield" %>
+                                </li>
+                                <li>
+					    			<label for="field_8">Int Issues</label>
+                                    <%= f.text_field :InternalIssues, :id => "field8", :class => "normal-textfield" %>
+                                </li>
+                                <li>
+					    			<label for="field_9">Ext Issues</label>
+                                    <%= f.text_field :ExternalIssues, :id => "field9", :class => "normal-textfield" %>
+                                </li>
+                                <li>
+                                    <input type="submit" class="submit" value="Save Schedule Information" />
+                                    <span>or <%= link_to 'Cancel', projectdetails_path, :id => "LnkCancel" %></span>
+                                </li>
+				    		</ol>
+					    </div>
+				    </td>
+    			</tr>
+	    	</table>
+            <% end %>
+         <% end %>
+	</div>

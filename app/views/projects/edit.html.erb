@@ -1,0 +1,31 @@
+<!--Body-->
+	<div class="container">
+		<h1>Edit Project Information</h1>
+        <% form_for(@project) do |f| %>
+		<table class="data">
+			<tr>
+				<td colspan="7">
+					<div class="data-entry-form">
+						<div class="clearfix">
+                            <%= f.error_messages %>
+						</div>
+						<ol>
+							<li>
+								<label for="field_2">Project name</label>
+								<%= f.text_field :name, :id => "field_2", :class => "normal-textfield" %>
+							</li>
+                            <li>
+								<label for="field_3">Location</label>
+                                <%= f.text_field :location, :id => "field3", :class => "normal-textfield" %>
+                            </li>
+                            <li>
+                                <input type="submit" class="submit" value="Save Project Information" />
+                                <span>or <%= link_to 'Cancel', projects_path %></span>
+                            </li>
+						</ol>
+					</div>
+				</td>
+			</tr>
+		</table>
+        <% end %>
+	</div>

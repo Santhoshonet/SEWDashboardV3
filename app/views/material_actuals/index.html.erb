@@ -1,0 +1,94 @@
+<!--Body-->
+	<div class="header-container">
+		<div class="project-select">
+                <% unless session[:project_id].nil? or session[:project_id].empty? %>
+                    <% Project.find(:all, :conditions => "id = #{session[:project_id]}").each do |proj| %>
+                        <p class="project-name"><%= proj.name%></p>
+				        <span class="project-location"><%= proj.location %><%= image_tag "project-dropdown-arrow.png" %></span>
+                    <% end %>
+                <% else %>
+                    <p class="project-name">Select your project</p>
+				    <span class="project-location"><img src="images/project-dropdown-arrow.png"/></span>
+                <% end %>
+		</div>
+         <div id="project-select-dropdown-container">
+            <ul id="project-select-dropdown">
+                <% @projectlist.each do |proj| %>
+				    <li loc='<%= proj.location %>'> <%= link_to proj.name, material_actuals_path + "/" + proj.id.to_s %></li>
+               <% end %>
+			</ul>
+        </div>
+	</div>
+	<div class="container">
+        <div class="sub-nav">
+            <ul>
+                <li><%= link_to "Schedule" , projectdetails_path %></li>
+                <li><%= link_to "Machinery" , materials_path %></li>
+                <li class="selected"><%= link_to "Material",material_actuals_path %></li>
+            </ul>
+        </div>
+		<table class="data">
+			<tr>
+				<th class="left" tooltip="Material Name">Material Name</th>
+				<th tooltip="Unit">Unit</th>
+                <th tooltip="Available Quantity">Available Quantity</th>
+				<th tooltip="Consumption Quantity">Consumption Quantity</th>
+                <th class="right" tooltip="">Action</th>
+			</tr>
+            <% @material_actuals.each_with_index do |material_actual,index| %>
+            <tr <% if index%2 == 1 %> class="odd" <% end %>>
+                <td><%=h material_actual.name %></td>
+                <td><%=h material_actual.unit %></td>
+                <td><%=h material_actual.availableqty %></td>
+                <td><%=h material_actual.consumptionqty %></td>
+                <td><%= link_to 'Edit', edit_material_actual_path(material_actual) %></td>
+            </tr>
+            <% end %>
+		</table>
+        <% unless @material_actual.nil? %>
+        <table id="TblAddnewMaterial">
+            <tr>
+                <td>
+                  <%= link_to 'Add new Material Detail', material_actuals_path, :id => "LnkAddnewmaterial" %>
+                </td>
+            </tr>
+        </table>
+            <% form_for(@material_actual) do |f| %>
+	    	<table class="data" id="TblAddMaterialForm">
+		    	<tr>
+			    	<td colspan="7">
+				    	<div class="data-entry-form">
+
+                            <div class="clearfix">
+                                <%= f.error_messages %>
+		    				</div>
+			    			<ol>
+				    			<li>
+					    			<label for="field_2">Material Name</label>
+						    		<%= f.text_field :name, :id => "field_2", :class => "normal-textfield" %>
+							    </li>
+    							<li>
+	    							<label for="field_4">Unit</label>
+                                    <%= f.text_field :unit, :id => "field4", :class => "normal-textfield" %>
+			    				</li>
+                                <li>
+					    			<label for="field_5">Available Quantity</label>
+						    		<%= f.text_field :availableqty, :id => "field5", :class => "normal-textfield" %>
+                                </li>
+    							<li>
+	    							<label for="field_6">Consumption Quantity</label>
+                                    <%= f.text_field :consumptionqty, :id => "field6", :class => "normal-textfield" %>
+                                </li>
+                                <li>
+                                    <input type="submit" class="submit" value="Save Material Information" />
+                                    <span>or <a href="#" id ="LnkCancel">Cancel</a></span>
+                                </li>
+				    		</ol>
+					    </div>
+				    </td>
+    			</tr>
+	    	</table>
+            <% end %>
+         <% end %>
+	</div>
+

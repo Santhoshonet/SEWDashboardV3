@@ -1,0 +1,98 @@
+<!--Body-->
+    <div class="container">
+		<h1>Project Dashboard</h1>
+        <div class="sub-nav">
+            <ul>
+                <li><%= link_to "Schedule",:action => "index" %></li>
+                <li class="selected"><%= link_to "Resource",:action => "resource" %></li>
+            </ul>
+        </div>
+		<div class="report-container-2by2a">
+            <h2>Delay Analysis</h2>
+            <div id="chart-4" style="margin:10px 30px 40px 10px;"></div>
+        </div>
+        <div class="report-container-2by2b">
+            <h2>Asset Vs Production Efficiency</h2>
+            <div id="chart-5" style="margin:10px 30px 40px 10px;"></div>
+        </div>
+        <div class="report-container-2by2a">
+            <h2>Material Usage</h2>
+                <span class="report-container-title">
+                    <h4>Asphalt Usage</h4>
+                    <span id="asphalt">9,<%= flash[:asphault_cummulative] %>,10,8,6 <canvas></canvas></span>
+                </span>
+                <span class="report-container-title">
+                    <h4>Concrete Usage</h4>
+                    <span id="concrete">9,<%= flash[:concrete_cummulative] %>,10,8,6 <canvas></canvas></span>
+                </span>
+                <span class="report-container-title">
+                    <h4>HSteel Usage</h4>
+                    <span id="hsteel">9,<%= flash[:hsteel_cummulative] %>,10,8,6 <canvas></canvas></span>
+                </span>
+                <span class="report-container-title">
+                    <h4>RSteel Usage</h4>
+                    <span id="rsteel">9,<%= flash[:rsteel_cummulative] %>,10,8,6 <canvas></canvas></span>
+                </span>
+            </div>
+        <div class="report-container-2by2a">
+            <h2>Human Resource Utilization</h2>
+                <span class="report-container-title">
+                    <h4>HR Utilization</h4>
+                    <span id="hr">9,6,10,8,6 <canvas></canvas></span>
+                </span>
+        </div>
+		<div class="clearfix"></div>
+	</div>
+    <div style='display:none'>
+        <div id='Delay Analysis'>
+          <%= flash[:delayanalysis] %>
+        </div>
+        <div id='asset_vs_production_efficiency'>
+          <%= flash[:asset_vs_production_efficiency] %>
+        </div>
+        <div id='asphault_cummulative'>
+            <%= flash[:asphault_cummulative] %>
+        </div>
+        <div id='concrete_cummulative'>
+            <%= flash[:concrete_cummulative] %>
+        </div>
+        <div id='hsteel_cummulative'>
+            <%= flash[:hsteel_cummulative] %>
+        </div>
+        <div id='rsteel_cummulative'>
+            <%= flash[:rsteel_cummulative] %>
+        </div>
+        <div id='man_power_usage_cummulative'>
+            <%= flash[:man_power_usage_cummulative] %>
+        </div>
+        <div id='issuelastmonth'>
+            <%= flash[:issuelastmonth] %>
+        </div>
+        <div id='issuelastbeforemonth'>
+            <%= flash[:issuelastbeforemonth] %>
+        </div>
+        <div id='issuelast2monthsback'>
+            <%= flash[:issuelast2monthsback] %>
+        </div>
+        <div id='donuttitle_outer_most'>
+           <%= flash[:donuttitle_outer_most] %>
+        </div>
+        <div id='donuttitle_outer'>
+            <%= flash[:donuttitle_outer] %>
+        </div>
+        <div id='donuttitle_inner'>
+           <%= flash[:donuttitle_inner] %>
+        </div>
+        <div id='Lreminimum'>
+           <%= flash[:lre_minimum] %>
+        </div>
+        <div id='Lremaximum'>
+            <%= flash[:lre_maximum] %>
+        </div>
+        <div id="productionEfficiency">
+            <%= flash[:productionEfficiency] %>
+        </div>
+        <div id="assetEfficiency">
+            <%= flash[:assetEfficiency] %>
+        </div>
+    </div>

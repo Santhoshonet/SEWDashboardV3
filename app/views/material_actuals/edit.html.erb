@@ -1,0 +1,39 @@
+ <!--Body-->
+	<div class="container">
+		<h1>Edit Machinery Information</h1>
+        <% form_for(@material_actual) do |f| %>
+		<table class="data">
+			<tr>
+				<td colspan="7">
+					<div class="data-entry-form">
+                        <div class="clearfix">
+                            <%= f.error_messages %>
+						</div>
+						<ol>
+							<li>
+								<label for="field_2">Material Name</label>
+								<%= f.text_field :name, :id => "field_2", :class => "normal-textfield" %>
+							</li>
+							<li>
+								<label for="field_4">Unit</label>
+                                <%= f.text_field :unit, :id => "field4", :class => "normal-textfield" %>
+							</li>
+                            <li>
+								<label for="field_5">Avalable Quantity</label>
+								<%= f.text_field :availableqty, :id => "field5", :class => "normal-textfield" %>
+                            </li>
+							<li>
+								<label for="field_6">Consumption Quantity</label>
+                                <%= f.text_field :consumptionqty, :id => "field6", :class => "normal-textfield" %>
+                            </li>
+                            <li>
+                                <input type="submit" class="submit" value="Save Machinery Information" />
+                                <span>or <%= link_to 'Cancel', material_actuals_path %></span>
+                            </li>
+						</ol>
+					</div>
+				</td>
+			</tr>
+		</table>
+        <% end %>
+	</div>

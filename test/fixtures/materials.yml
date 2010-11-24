@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  assetnumber: 
+  description: 
+  capacity: 
+  ifc: 
+  scheduledhour: 
+  unavailablehour: 
+  utilizedhours: 
+  theoreticaloutput: 
+  actualoutput: 
+  theoreticalconsumption: 
+  actualconsumption: 1.5
+
+two:
+  assetnumber: 
+  description: 
+  capacity: 
+  ifc: 
+  scheduledhour: 
+  unavailablehour: 
+  utilizedhours: 
+  theoreticaloutput: 
+  actualoutput: 
+  theoreticalconsumption: 
+  actualconsumption: 1.5

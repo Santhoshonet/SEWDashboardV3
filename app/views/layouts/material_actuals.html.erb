@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Project Details - Materials</title>
+  <link REL="shortcut icon" type="image/x-icon" HREF="favicon.ico">
+  <%= stylesheet_link_tag "reset", :media => "screen,projection" %>
+  <%= stylesheet_link_tag "site", :media => "screen, projection" %>
+  <%= javascript_include_tag "jquery-1.4.3.min" %>
+  <%= javascript_include_tag "materialactual" %>
+  <%= javascript_include_tag "TblHeader" %>
+</head>
+<body>
+ <!--Header-->
+	<div class="header-container">
+		<%= image_tag "Logo-small.png" %>
+	</div>
+	<div class="nav-container">
+		<div class="top-nav">
+			<ul class="nav">
+				<li><%= link_to "Dashboard", :controller => "dashboard" %></li>
+				<li><%= link_to "Projects" , projects_path %></li>
+                <li class="selected"><%= link_to "Project Details", projectdetails_path %></li>
+			</ul>
+		</div>
+	</div>
+    <%= yield %>
+</body>
+</html>

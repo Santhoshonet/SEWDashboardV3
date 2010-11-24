@@ -1,0 +1,186 @@
+    <!--Body-->
+    <div class="container">
+		<h1>Project Dashboard <span class="menu-button"><a href="#" class="small blue gradient-button">Filter</a></span></h1>
+        <div class="filter-container" <% if flash[:filter] == false %> style="display:none;" <% end %> >
+			<form action="/dashboard/filter" method="get">
+				<label>Date Range </label>
+				    <select name="FromMonth">
+                          <option value="1" <% if @startmonth == 1 %> selected="true" <% end %> >January</option>
+                          <option value="2" <% if @startmonth == 2 %> selected="true" <% end %>>February</option>
+                          <option value="3" <% if @startmonth == 3 %> selected="true" <% end %>>March</option>
+                          <option value="4" <% if @startmonth == 4 %> selected="true" <% end %>>April</option>
+                          <option value="5" <% if @startmonth == 5 %> selected="true" <% end %>>May</option>
+                          <option value="6" <% if @startmonth == 6 %> selected="true" <% end %>>June</option>
+                          <option value="7" <% if @startmonth == 7 %> selected="true" <% end %>>July</option>
+                          <option value="8" <% if @startmonth == 8 %> selected="true" <% end %>>August</option>
+                          <option value="9" <% if @startmonth == 9 %> selected="true" <% end %>>September</option>
+                          <option value="10" <% if @startmonth == 10 %> selected="true" <% end %>>October</option>
+                          <option value="11" <% if @startmonth == 11 %> selected="true" <% end %>>November</option>
+                          <option value="12" <% if @startmonth == 12 %> selected="true" <% end %>>December</option>                      
+				    </select>
+                    <select name="FromYear">
+                      <% 2005.upto(2020) do |yr| %>
+                        <option value="<%= yr%>" <% if @startyear == yr %> selected="true" <% end %> ><%= yr%></option>
+                      <% end %>
+                    </select>
+                    &nbsp;&nbsp;
+                    to
+                    &nbsp;&nbsp;
+                    <select name="ToMonth">
+                          <option value="1" <% if @endmonth == 1 %> selected="true" <% end %>>January</option>
+                          <option value="2" <% if @endmonth == 2 %> selected="true" <% end %>>February</option>
+                          <option value="3" <% if @endmonth == 3 %> selected="true" <% end %>>March</option>
+                          <option value="4" <% if @endmonth == 4 %> selected="true" <% end %>>April</option>
+                          <option value="5" <% if @endmonth == 5 %> selected="true" <% end %>>May</option>
+                          <option value="6" <% if @endmonth == 6 %> selected="true" <% end %>>June</option>
+                          <option value="7" <% if @endmonth == 7 %> selected="true" <% end %>>July</option>
+                          <option value="8" <% if @endmonth == 8 %> selected="true" <% end %>>August</option>
+                          <option value="9" <% if @endmonth == 9 %> selected="true" <% end %>>September</option>
+                          <option value="10" <% if @endmonth == 10 %> selected="true" <% end %>>October</option>
+                          <option value="11" <% if @endmonth == 11 %> selected="true" <% end %>>November</option>
+                          <option value="12" <% if @endmonth == 12 %> selected="true" <% end %>>December</option>
+				    </select>
+                    <select name="ToYear">
+                      <% 2005.upto(2020) do |yr| %>
+                        <option value="<%= yr%>" <% if @endyear == yr %> selected="true" <% end %>><%= yr%></option>
+                      <% end %>
+                    </select>
+                    <a href="#" class="small blue gradient-button" id="FilterSubmitButton">Filter</a>
+			</form>
+		</div>
+        <div class="sub-nav">
+            <ul>
+                <li class="selected"><%= link_to "Schedule",:action => "index" %></li>
+                <li><%= link_to "Resource",:action => "resource" %></li>
+            </ul>
+        </div>
+		<div class="report-container-2by3">
+			<h2>Contract Confidence</h2>
+			<div id="chart-1" style="margin:10px 30px 40px 10px;"></div>    
+		</div>
+        <div class="report-container-1by3">
+            <span class="report-container-title">
+                Key Data <%= flash[:confidencelastmonth] %>
+            </span>
+            <span class="report-container-subtitle">
+                Budget Confidence Index
+            </span>
+            <span class="report-container-value">
+                <%= flash[:budgetconfidenceIndex] %>
+            </span>
+            <span class="report-container-subtitle">
+                Re Estimate Index
+            </span>
+            <span class="report-container-value">
+                <%= flash[:estimateconfidenceIndex] %>
+            </span>
+        </div>
+        <div class="report-container-2by3">
+            <h2>Estimate Confidence</h2>
+            <div id="chart-2" style="margin:10px 30px 40px 10px;"></div>
+        </div>
+        <div class="report-container-1by3">
+            <span class="report-container-title">
+                Key Data 
+            </span>
+            <span class="report-container-subtitle">
+                Planned Value
+            </span>
+            <span class="report-container-value">
+                <%= flash[:plannedValue] %> Cr.
+            </span>
+            <span class="report-container-subtitle">
+                LRE Site
+            </span>
+            <span class="report-container-value">
+                <%= flash[:lresite] %> Cr.
+            </span>
+            <span class="report-container-subtitle">
+                LRE PMC
+            </span>
+            <span class="report-container-value">
+                <%= flash[:lrepmc] %> Cr.
+            </span>
+        </div>
+        <div class="report-container-2by3">
+            <h2>Cost Vs Schedule Performance</h2>
+            <div id="chart-3" style="margin:10px 30px 40px 10px;"></div>
+        </div>
+        <div class="report-container-1by3">
+            <span class="report-container-title">
+                Key Data <%= flash[:confidencelastmonth] %>
+            </span>
+            <span class="report-container-subtitle">
+                Cost Performance Index
+            </span>
+            <span class="report-container-value">
+                <%= flash[:cpi] %>
+            </span>
+            <span class="report-container-subtitle">
+                Schedule Performance Index
+            </span>
+            <span class="report-container-value">
+                <%= flash[:spi] %>
+            </span>
+        </div>
+		<div class="clearfix"></div>
+	</div>
+    <div style='display:none'>
+        <div id='contract_budget_confidence'>
+          <%= flash[:contract_budget_confidence] %>
+        </div>
+        <div id='contract_reestimate_confidence'>
+          <%= flash[:contract_reestimate_confidence] %>
+        </div>
+        <div id='pv_cummulative'>
+          <%= flash[:pv_cummulative] %>
+        </div>
+        <div id='lresite_cummulative'>
+            <%= flash[:lresite_cummulative] %>
+        </div>
+        <div id='lrepmc_cummulative'>
+            <%= flash[:lrepmc_cummulative] %>
+        </div>
+        <div id='cpi_cummulative'>
+            <%= flash[:cpi_cummulative] %>
+        </div>
+        <div id='spi_cummulative'>
+            <%= flash[:spi_cummulative] %>
+        </div>
+        <div id='asphault_cummulative'>
+            <%= flash[:asphault_cummulative] %>
+        </div>
+        <div id='concrete_cummulative'>
+            <%= flash[:concrete_cummulative] %>
+        </div>
+        <div id='hsteel_cummulative'>
+            <%= flash[:hsteel_cummulative] %>
+        </div>
+        <div id='rsteel_cummulative'>
+            <%= flash[:rsteel_cummulative] %>
+        </div>
+        <div id='machine_usage_cummulative'>
+            <%= flash[:machine_usage_cummulative] %>
+        </div>
+        <div id='man_power_usage_cummulative'>
+            <%= flash[:man_power_usage_cummulative] %>
+        </div>
+        <div id='issuelastmonth'>
+            <%= flash[:issuelastmonth] %>
+        </div>
+        <div id='issuelastbeforemonth'>
+            <%= flash[:issuelastbeforemonth] %>
+        </div>
+        <div id='donuttitle_outer'>
+            <%= flash[:donuttitle_outer] %>
+        </div>
+        <div id='donuttitle_inner'>
+           <%= flash[:donuttitle_inner] %>
+        </div>
+        <div id='Lreminimum'>
+           <%= flash[:lre_minimum] %>
+        </div>
+        <div id='Lremaximum'>
+            <%= flash[:lre_maximum] %>
+        </div>
+    </div>

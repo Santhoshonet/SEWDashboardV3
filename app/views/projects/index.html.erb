@@ -1,0 +1,57 @@
+<!--Body-->
+	<div class="container">
+		<h1>Projects Information</h1>
+		<table class="data">
+			<tr>
+				<th class="left" tooltip="Name of the project">Project name</th>
+				<th tooltip="Location of the project">Location</th>
+                <th tooltip="">Action</th>
+                <th class="right" tooltip="Navigation details">Details</th>
+			</tr>
+            <% @projects.each_with_index do |project,index| %>
+            <tr <% if index%2 == 1 %> class="odd" <% end %>>
+                <td><%= project.name %></td>
+                <td><%=h project.location %></td>
+                <td><%= link_to 'Edit', edit_project_path(project) %></td>
+                <td><%= link_to "Schedule", projectdetails_path + '/' + project.id.to_s %> |
+                    <%= link_to "Machinery", materials_path + '/' + project.id.to_s %> |
+                    <%= link_to "Material", material_actuals_path + '/' + project.id.to_s %>
+                </td>
+            </tr>
+            <% end %>
+		</table>
+        <table id="TblAddnewProject">
+            <tr>
+                <td>
+                  <%= link_to 'Add new Project Information', new_project_path,:id => "LnkAddnewproject" %>
+                </td>
+            </tr>
+        </table>
+        <% form_for(@project) do |f| %>
+		<table class="data" id="TblAddProjectForm">
+			<tr>
+				<td>
+					<div class="data-entry-form">
+						<div class="clearfix">
+                            <%= f.error_messages %>
+						</div>
+						<ol>
+							<li>
+								<label for="field_2">Project name</label>
+								<%= f.text_field :name, :id => "field_2", :class => "normal-textfield" %>
+							</li>
+                            <li>
+								<label for="field_3">Location</label>
+                                <%= f.text_field :location, :id => "field3", :class => "normal-textfield" %>
+                            </li>
+                            <li>
+                                <input type="submit" class="submit" value="Save Project Information" />
+                                <span>or <%= link_to 'Cancel', projects_path, :id => "LnkCancle" %></span>
+                            </li>
+						</ol>
+					</div>
+				</td>
+			</tr>
+		</table>
+        <% end %>
+	</div>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  unit: MyString
+  Availableqty: 1
+  Consumptionqty: 1
+
+two:
+  name: MyString
+  unit: MyString
+  Availableqty: 1
+  Consumptionqty: 1

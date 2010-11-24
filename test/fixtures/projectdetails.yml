@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  month: 2010-11-08
+  OriginalBaselinePlan: 1.5
+  LreSite: 1.5
+  LrePmc: 1.5
+  Ac: 1.5
+  PercentageProgress: 1.5
+  Action: 1.5
+
+two:
+  month: 2010-11-08
+  OriginalBaselinePlan: 1.5
+  LreSite: 1.5
+  LrePmc: 1.5
+  Ac: 1.5
+  PercentageProgress: 1.5
+  Action: 1.5
