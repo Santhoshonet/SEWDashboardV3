@@ -1,8 +1,5 @@
 $(function () {
-
     $.jqplot.config.enablePlugins = true;
-
-
     function generateArray(str) {
         if (str != null && str != "") {
             var split = str.split('#');
@@ -34,9 +31,6 @@ $(function () {
             return array;
         }
     };
-
-
-
 
 /**    s1 = [['2010-Apr-1', -3], ['2010-May-1', -1], ['2010-Jun-1', 1],['2010-Jul-1', 2],['2010-Aug-1', 4]];
     s2 = [['2010-Apr-1', -2], ['2010-May-1', 0], ['2010-Jun-1', 3],['2010-Jul-1', 4],['2010-Aug-1', 6]];
@@ -166,8 +160,8 @@ $(function () {
             seriesToggle: true
         },
         cursor:{
-            show:true,
-            zoom:true,
+            show:false,
+            zoom:false,
             showTooltip:false
         }
     });
@@ -237,8 +231,8 @@ $(function () {
             marginTop: '40px'
         },
         cursor:{
-            show:true,
-            zoom:true,
+            show:false,
+            zoom:false,
             showTooltip:false
         }
     });
@@ -293,8 +287,8 @@ $(function () {
         ],
         seriesColors: ["#006CC6","#FF9000"],
         cursor:{
-            show:true,
-            zoom:true,
+            show:false,
+            zoom:false,
             showTooltip:false
         },
         legend: {
